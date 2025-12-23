@@ -1,0 +1,63 @@
+[project]
+name = "porcentagem-cespe"
+version = "1.0.0"
+description = "Análise estatística de questões de concursos CESPE/CEBRASPE"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Gabriel Ramos" }]
+keywords = ["cespe", "concursos", "estatísticas", "análise de dados"]
+
+dependencies = [
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/prof-ramos/porcentagem_cespe"
+Repository = "https://github.com/prof-ramos/porcentagem_cespe"
+"Bug Tracker" = "https://github.com/prof-ramos/porcentagem_cespe/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+]
+
+[project.scripts]
+validar = "porcentagem_cespe.cli:validar_hierarquia"
+analisar = "porcentagem_cespe.cli:analisar_dados"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # Pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+
+[tool.ruff.isort]
+known-first-party = ["porcentagem_cespe"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_ignores = true
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=porcentagem_cespe --cov-report=term-missing"
